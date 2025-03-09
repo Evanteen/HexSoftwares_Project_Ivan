@@ -1,0 +1,46 @@
+
+# fibonacii seqance:  0,1,1,2,3,5,8,13,21,34,55,89....
+
+
+class Gen():
+ def twoterm_fibonacii_Gen(Term1 , Term2, end):
+    #return many output so it could be used in some aplications with out a waste Out
+    T0 = 0
+
+    try: 
+     T1, T2, end = int(Term1), int(Term2), int(end)
+
+    except TypeError: 
+     #default to base 10 of the typical fibonacii seqance
+     print("Error: Please only use numbers as inputs")
+     T1, T2, end = 1, 1, 11
+
+    finally:
+     
+     OutputList = []
+     for no in range(end + 1):
+
+        # Preceeding fuction Term(2) - Term(1) = Term(0)
+        # Term(-1) = Term(0) - 
+        Tn = 0 + T0
+        T0 = T2 - T1
+        count = T2 + T1
+        T1 = T2
+        T2 = count
+        OutputList.append(Tn)
+     
+     return OutputList
+    #outputs List Object
+
+def main():
+    #Inputs
+    Input1 = input("Input The first term of Seqance: ")
+    Input2 = input("Input The Second term of Seqance: ")
+    Input3_end = input("How many Numbers would you like to generate: ")
+    #call Genarator
+
+    print(Gen.twoterm_fibonacii_Gen(Term1= Input1,Term2= Input2, end= Input3_end))
+    #Print list object
+
+if __name__ == '__main__':
+    main()
