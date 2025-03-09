@@ -1,7 +1,6 @@
 
 # fibonacii seqance:  0,1,1,2,3,5,8,13,21,34,55,89....
 
-
 class Gen():
  def twoterm_fibonacii_Gen(Term1 , Term2, end):
     #return many output so it could be used in some aplications with out a waste Out
@@ -12,7 +11,6 @@ class Gen():
 
     except TypeError: 
      #default to base 10 of the typical fibonacii seqance
-     print("Error: Please only use numbers as inputs")
      T1, T2, end = 1, 1, 11
 
     finally:
