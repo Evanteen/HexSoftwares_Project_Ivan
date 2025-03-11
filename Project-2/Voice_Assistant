@@ -1,0 +1,130 @@
+
+import pyttsx3
+import datetime
+import os
+import speech_recognition as sr
+import wikipedia
+import webbrowser
+
+def listen():
+    r = sr.Recognizer()
+    with sr.Microphone() as source:
+        print("Listening....")
+       # r.adjust_for_ambient_noise(source)  # Helps with background noise
+        audio = r.listen(source)
+    try:
+        print("regnizing")
+        recognized_text = r.recognize_google(audio)
+        print(type(recognized_text))
+        print("I think you said: " + recognized_text)
+        Speak("I think you said: " + recognized_text)
+        return recognized_text
+    except Exception:
+        print("i could not understand audio")
+        Speak("i could not understand audio")
+        return 'None'
+
+
+# Initialize the speech engine
+engine = pyttsx3.init('sapi5')
+voices = engine.getProperty('voices')
+engine.setProperty('voice', voices[1].id)
+
+def Speak(audio):
+#Speaks out the given text
+    engine.say(audio)
+    engine.runAndWait()
+
+class Time:
+#Handles time-based operations
+    
+    @staticmethod
+    def Timenow(format_str="%H:%M"):
+        """Returns the current time in the given format"""
+        return datetime.datetime.now().strftime(format_str)
+    
+    @staticmethod
+    def TimeHour():
+        """Returns the current hour"""
+        return datetime.datetime.now().hour
+
+class TimeOfDayPrompts:
+#Handles time-based greetings
+    
+    @staticmethod
+    def get_greeting():
+#Returns an appropriate greeting based on the time of day along with setting it
+        hour = Time.TimeHour()
+        
+        if 6 <= hour < 12:
+            return "Good morning!"
+        elif 12 <= hour < 18:
+            return "Good afternoon!"
+        elif 18 <= hour < 22:
+            return "Good evening!"
+        else:
+            return "Good night!"
+
+def IntroductionStr(ai_name, company):
+#Generates an introduction string .... the decration to the logic
+    current_time = Time.Timenow("%H:%M")
+    today_date = datetime.datetime.now().strftime("%A, %B %d, %Y")  # Example: Monday, July 8, 2024
+    greeting = TimeOfDayPrompts.get_greeting()
+    
+    response = f"{greeting} I am {ai_name}, your assistant here at {company}. The time is {current_time}, and today's date is {today_date}."
+    
+    return response
+
+def HandleRequests():
+
+    pass
+
+
+def main():
+    Is_Running = True
+    ai_assistant = "Eilie"
+    company = "Mali Beauty"
+    
+    intro_message = IntroductionStr(ai_assistant, company)
+    
+    print(intro_message)
+    Speak(intro_message)
+    print()
+    while Is_Running:
+        print()
+        Speak("How may i Help you")
+        print()
+        recognized_text = listen().lower()
+        print(recognized_text)
+
+        if ('wikipedia')  in recognized_text:
+            print(".....")
+            recognized_text = recognized_text.replace('wikipedia', '')
+            Speak('Shearching Wikipedia...')
+            result = wikipedia.summary(recognized_text, sentences= 2)
+            Speak('Well According to wikipedia')
+            print(result)
+            Speak(result)
+        elif ('google' or 'search')  in recognized_text:
+            print(".....")
+            recognized_text = recognized_text.replace('goodle' or 'search', '')
+            Speak("Accessing browser...")
+            try:
+                webbrowser.Chrome.open_new(f'https://www.google.co.za/search?q={recognized_text}')
+            
+            except Exception:
+
+                webbrowser.open(f'https://www.google.co.za/search?q={recognized_text}')
+        elif ('cdda') in recognized_text:
+            Game_dir = "C:\\Desktop\\CDDA GZ.lnk"
+            open(Game_dir)
+            os.path.join(Game_dir)
+            os.startfile(Game_dir)
+        elif ('stop') in recognized_text:
+            Is_Running = False
+            Speak(f"Thank you, and it has been a pleasure, i have been {ai_assistant}")
+
+
+
+if __name__ == "__main__":
+    main()

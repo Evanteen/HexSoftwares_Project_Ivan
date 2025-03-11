@@ -1,0 +1,60 @@
+
+#  1.1, 1.2, 1.3 > 1,2,3 >> X,1,2
+#  2.1, 2.2, 2.3 > 4,5,6 >> 3,4,O
+#  3.1, 3.2, 3.3 > 7,8,9 >> 5,6,X
+# TODO build the grip
+import random
+import tkinter as tk
+
+
+def triggerGame():
+ pass
+def decodeObjectToGrid():
+   NewMove = 7
+   Moves = [1,5]
+   DObject = {}
+   t = 0
+   for i in Moves: 
+     t += 1
+   AvailableSlots = t 
+   if not NewMove > AvailableSlots :
+     pin = True
+     value = 1
+     key = 1
+     #! 1.1, #! 2.3,#! 3.3
+     #set keys
+     for i in range(9):
+        if Moves[0] != i:
+         value += 1
+         if value > 3:
+          val = 0
+          key += 1
+        else:
+          DObject.update({key:value})
+     
+     Moves.append(NewMove)
+
+     return DObject
+
+
+
+def Update():
+   pass
+def drawGrid():
+
+
+ posistion= {1:1,1:2,1:3,
+             2:1,2:2,2:3,
+             3:1,3:2,3:3}
+
+ root = tk.Tk()
+ root.mainloop()
+
+def main():
+    triggerGame()
+    print(decodeObjectToGrid())
+    drawGrid()
+    Update()
+
+if __name__ == '__main__':
+    main()
