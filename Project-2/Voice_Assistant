@@ -120,6 +120,10 @@ def main():
             open(Game_dir)
             os.path.join(Game_dir)
             os.startfile(Game_dir)
+        elif ('play') in recognized_text:
+            Game_dir = "C:Project-3\Game_X_And_Os"
+            open(Game_dir)
+            os.path.join(Game_dir)
         elif ('stop') in recognized_text:
             Is_Running = False
             Speak(f"Thank you, and it has been a pleasure, i have been {ai_assistant}")
